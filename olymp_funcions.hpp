@@ -7,6 +7,8 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <algorithm>
+#include <numeric>
 
 template<class T>
 std::ostream& operator << (std::ostream& os, const std::vector<T>& vector) {

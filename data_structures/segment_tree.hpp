@@ -50,6 +50,11 @@ template <class T, class BaseOperation>
 void SegmentTree<T, BaseOperation>::build (const std::vector<T>& initial_data, li v, li left_responsibility,
                                            li right_responsibility)
 {
+	std::cout << "Vertex: " << v <<
+	// << " left range: " << left_responsibility << " right range: " << right_responsibility <<
+	" : [" << left_responsibility << "; " << right_responsibility << ")"
+	<< std::endl;
+
 	if (left_responsibility + 1 == right_responsibility) {
 		tree[v] = initial_data[left_responsibility];
 	}
@@ -57,7 +62,7 @@ void SegmentTree<T, BaseOperation>::build (const std::vector<T>& initial_data, l
 		li mid = (left_responsibility + right_responsibility) / 2;
 
 		build(initial_data, left_child(v), left_responsibility, mid);
-		build(initial_data, left_child(v), mid, right_responsibility);
+		build(initial_data, right_child(v), mid, right_responsibility);
 
 		tree[v] = tree[left_child(v)] + tree[right_child(v)]; // TODO: something else (max, min, sum depending on the BaseOperation!
 	}
