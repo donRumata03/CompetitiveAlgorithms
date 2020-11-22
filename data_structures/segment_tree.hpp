@@ -119,6 +119,7 @@ template <class T, class BaseOperation>
 T SegmentTree<T, BaseOperation>::get (li v, li left_responsibility, li right_responsibility, li index)
 {
 	if (left_responsibility + 1 == right_responsibility) {
+		assert(left_responsibility == index);
 		return tree[v];
 	}
 
@@ -131,8 +132,21 @@ T SegmentTree<T, BaseOperation>::get (li v, li left_responsibility, li right_res
 template <class T, class BaseOperation>
 void SegmentTree<T, BaseOperation>::set (li v, li left_responsibility, li right_responsibility, li index, const T& value)
 {
+	if (left_responsibility + 1 == right_responsibility) {
+		assert(left_responsibility == index);
+		tree[left_responsibility] = value;
+	}
+	else {
+		li mid = (left_responsibility + right_responsibility) / 2;
 
-	update_value(value);
+		if (index < mid) {
+			set(left_child(v), left_responsibility, mid, index, value);
+		}
+		else {
+			set(right_child(v), mid, right_responsibility, index, value);
+		}
+		update_value(value);
+	}
 }
 
 
@@ -153,11 +167,40 @@ struct SumOperation {
 	}
 };
 
+template<class T>
+struct MaxOperation {
+	static T compute(const T& v1, const T& v2) {
+		return std::max(v1, v2);
+	}
+
+	static T default_value() {
+		return std::numeric_limits<T>::min();
+	}
+};
+
+template<class T>
+struct MinOperation {
+	static T compute(const T& v1, const T& v2) {
+		return std::min(v1, v2);
+	}
+
+	static T default_value() {
+		return std::numeric_limits<T>::max();
+	}
+};
+
 
 /**
  * Segment Tree aliases
  */
+
 template<class T>
 using SumSegmentTree = SegmentTree<T, SumOperation<T>>;
+
+template<class T>
+using MaxSegmentTree = SegmentTree<T, MaxOperation<T>>;
+
+template<class T>
+using MinSegmentTree = SegmentTree<T, MinOperation<T>>;
 
 
