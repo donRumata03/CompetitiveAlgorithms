@@ -3,4 +3,12 @@ project(CompetitiveAlgorithms)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(CompetitiveAlgorithms main.cpp segment_tree.hpp)
+include_directories(./)
+
+add_executable(CompetitiveAlgorithms
+        main.cpp
+
+        data_structures/segment_tree.hpp
+        tests/segment_tree_test.hpp
+
+        olymp_funcions.hpp)

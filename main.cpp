@@ -1,7 +1,10 @@
 #include <iostream>
+#include <tests/segment_tree_test.hpp>
 
 int main ()
 {
-	std::cout << "Hello, World!" << std::endl;
+
+	stree_building_test();
+
 	return 0;
 }
