@@ -15,16 +15,25 @@ class SegmentTree
 {
 public:
 	SegmentTree() = delete;
-	SegmentTree(const std::vector<T>& initial_data);
+	explicit SegmentTree(const std::vector<T>& initial_data);
+
+	T sum(li l, li r); // sum of array[l, r)
+	T get(li index) { return get(0, 0, n, index); }
+	void set(li index, const T& value) { set(0, 0, n, index, value); }
 
 private:
 	li left_child(li v) { return v * 2 + 1; }
 	li right_child(li v) { return v * 2 + 2; }
 
-
 	void build (const std::vector<T>& initial_data, li v, li left_responsibility, li right_responsibility);
+	T sum (li v, li left_responsibility, li right_responsibility, li l, li r);
+
+	T get(li v, li left_responsibility, li right_responsibility, li index);
+	void set(li v, li left_responsibility, li right_responsibility, li index, const T& value);
+
 
 private: // data
+	li n;
 	std::vector<T> tree;
 	// std::vector<T> additions;
 };
@@ -35,14 +44,12 @@ private: // data
  */
 
 template <class T, class BaseOperation>
-SegmentTree<T, BaseOperation>::SegmentTree (const std::vector<T>& initial_data)
+SegmentTree<T, BaseOperation>::SegmentTree (const std::vector<T>& initial_data) : n(initial_data.size())
 {
-	tree.resize(initial_data.size() * 4);
+	tree.resize(n * 4);
 
-	build(initial_data, 0, 0, initial_data.size());
+	build(initial_data, 0, 0, n);
 
-	// for (auto& t : tree) std::cout << t << " ";
-	// std::cout << std::endl;
 	std::cout << tree << std::endl;
 }
 
@@ -50,9 +57,8 @@ template <class T, class BaseOperation>
 void SegmentTree<T, BaseOperation>::build (const std::vector<T>& initial_data, li v, li left_responsibility,
                                            li right_responsibility)
 {
-	std::cout << "Vertex: " << v <<
-	// << " left range: " << left_responsibility << " right range: " << right_responsibility <<
-	" : [" << left_responsibility << "; " << right_responsibility << ")"
+	std::cout << "Vertex: " << v
+		<< " : [" << left_responsibility << "; " << right_responsibility << ")"
 	<< std::endl;
 
 	if (left_responsibility + 1 == right_responsibility) {
@@ -68,6 +74,63 @@ void SegmentTree<T, BaseOperation>::build (const std::vector<T>& initial_data, l
 	}
 }
 
+template <class T, class BaseOperation>
+T SegmentTree<T, BaseOperation>::sum (li l, li r)
+{
+	return sum(0, 0, n, l, r);
+}
+
+template <class T, class BaseOperation>
+T SegmentTree<T, BaseOperation>::sum (li v, li left_responsibility, li right_responsibility, li l, li r)
+{
+	if (l >= r) return BaseOperation::default_value();
+
+	assert(l >= left_responsibility && l <= right_responsibility);
+	assert(r >= left_responsibility && r <= right_responsibility);
+
+	if (l == left_responsibility && r == right_responsibility) {
+		return tree[v];
+	}
+
+	li mid = (left_responsibility + right_responsibility) / 2;
+
+	// If it's fully covered by the left child:
+	if (r <= mid) { // [l, r) is in [left_responsibility, mid)
+		return sum(left_child(v), left_responsibility, mid, l, r);
+	}
+	// If it's fully covered by the right child:
+	if (l >= mid) { // [l, r) is in [left_responsibility, mid)
+		return sum(right_child(v), mid, right_responsibility, l, r);
+	}
+
+	// Divide the segment into two parts:
+	return
+		sum(left_child(v), left_responsibility, mid, l, mid)
+								+
+		sum(right_child(v), mid, right_responsibility, mid, r);
+}
+
+template <class T, class BaseOperation>
+T SegmentTree<T, BaseOperation>::get (li v, li left_responsibility, li right_responsibility, li index)
+{
+	if (left_responsibility + 1 == right_responsibility) {
+		return tree[v];
+	}
+
+	li mid = (left_responsibility + right_responsibility) / 2;
+
+	if (index < mid) return get(left_child(v), left_responsibility, mid, index);
+	return get(right_child(v), mid, right_responsibility, index);
+}
+
+template <class T, class BaseOperation>
+void SegmentTree<T, BaseOperation>::set (li v, li left_responsibility, li right_responsibility, li index, const T& value)
+{
+
+}
+
+
+
 
 /**
  * Operation Templates
@@ -75,8 +138,12 @@ void SegmentTree<T, BaseOperation>::build (const std::vector<T>& initial_data, l
 
 template<class T>
 struct SumOperation {
-	static void compute() {
+	static T compute(const T& v1, const T& v2) {
+		return v1 + v2;
+	}
 
+	static T default_value() {
+		return T{}; // also T(0)
 	}
 };
 

@@ -9,11 +9,21 @@
 #include <iostream>
 #include <algorithm>
 #include <numeric>
+#include <cassert>
+#include <utility>
+
+
+template<class FirstT, class SecondT>
+std::ostream& operator << (std::ostream& os, const std::pair<FirstT, SecondT>& pair) {
+	os << "(" << pair.first << ", " << pair.second << ")";
+
+	return os;
+}
+
 
 template<class T>
 std::ostream& operator << (std::ostream& os, const std::vector<T>& vector) {
 	for (auto& v: vector) os << v << " ";
-	os << std::endl;
 
 	return os;
 }
