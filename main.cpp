@@ -8,8 +8,11 @@ int main ()
 	// stree_sum_test8();
 	// stree_sum_test3();
 
-	stree_getting_test3();
+	// stree_getting_test3();
 	// stree_getting_test8();
+
+
+	stree_setting_test3();
 
 	return 0;
 }

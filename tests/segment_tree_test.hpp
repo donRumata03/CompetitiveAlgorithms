@@ -131,3 +131,41 @@ inline void stree_getting_test3() {
 
 	stree_getting_test_base(test_vector);
 }
+
+inline void stree_setting_test_base(const std::vector<li>& test_vector, const std::vector<std::pair<li, li>>& queries)
+{
+	auto non_const_vector = test_vector;
+
+	SumSegmentTree<li> tree(test_vector);
+
+	li sum = std::accumulate(test_vector.begin(), test_vector.end(), 0LL);
+
+	for (auto& query : queries) {
+		sum += query.second - non_const_vector[query.first];
+
+		non_const_vector[query.first] = query.second;
+		tree.set(query.first, query.second);
+
+
+		std::cout << "tree.get(" << query.first << ") = " << tree.get(query.first) << " (expected: " << non_const_vector[query.first] << ") => "
+		<< (non_const_vector[query.first] == tree.get(query.first) ? "RIGHT" : "WRONG") << std::endl;
+
+		assert(tree.sum(0, test_vector.size()) == sum);
+	}
+}
+
+inline void stree_setting_test3() {
+	std::vector<li> test_vector = {
+			1, 2, 3 // 3 elements
+	};
+
+	std::vector<std::pair<li, li>> queries = {
+			{ 1, 1 },
+			{ 2, 10 },
+			{ 1, 7 },
+			{ 0, 3 }
+	};
+
+
+	stree_setting_test_base(test_vector, queries);
+}

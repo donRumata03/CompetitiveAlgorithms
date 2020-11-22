@@ -25,7 +25,7 @@ private:
 // API:
 	li left_child(li v) { return v * 2 + 1; }
 	li right_child(li v) { return v * 2 + 2; }
-	void update_value(li v) { tree[v] = BaseOperation(tree[left_child(v)], tree[right_child(v)]); }
+	void update_value(li v) { tree[v] = BaseOperation::compute(tree[left_child(v)], tree[right_child(v)]); }
 
 
 	void build (const std::vector<T>& initial_data, li v, li left_responsibility, li right_responsibility);
