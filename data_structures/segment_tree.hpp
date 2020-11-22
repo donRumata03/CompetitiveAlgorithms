@@ -22,8 +22,11 @@ public:
 	void set(li index, const T& value) { set(0, 0, n, index, value); }
 
 private:
+// API:
 	li left_child(li v) { return v * 2 + 1; }
 	li right_child(li v) { return v * 2 + 2; }
+	void update_value(li v) { tree[v] = BaseOperation(tree[left_child(v)], tree[right_child(v)]); }
+
 
 	void build (const std::vector<T>& initial_data, li v, li left_responsibility, li right_responsibility);
 	T sum (li v, li left_responsibility, li right_responsibility, li l, li r);
@@ -46,7 +49,7 @@ private: // data
 template <class T, class BaseOperation>
 SegmentTree<T, BaseOperation>::SegmentTree (const std::vector<T>& initial_data) : n(initial_data.size())
 {
-	tree.resize(n * 4);
+	tree.assign(n * 4, BaseOperation::default_value());
 
 	build(initial_data, 0, 0, n);
 
@@ -70,7 +73,8 @@ void SegmentTree<T, BaseOperation>::build (const std::vector<T>& initial_data, l
 		build(initial_data, left_child(v), left_responsibility, mid);
 		build(initial_data, right_child(v), mid, right_responsibility);
 
-		tree[v] = tree[left_child(v)] + tree[right_child(v)]; // TODO: something else (max, min, sum depending on the BaseOperation!
+		// tree[v] = tree[left_child(v)] + tree[right_child(v)]; // TODO: something else (max, min, sum depending on the BaseOperation!
+		update_value(v);
 	}
 }
 
@@ -105,9 +109,10 @@ T SegmentTree<T, BaseOperation>::sum (li v, li left_responsibility, li right_res
 
 	// Divide the segment into two parts:
 	return
-		sum(left_child(v), left_responsibility, mid, l, mid)
-								+
-		sum(right_child(v), mid, right_responsibility, mid, r);
+		BaseOperation::compute(
+				sum(left_child(v), left_responsibility, mid, l, mid),
+				sum(right_child(v), mid, right_responsibility, mid, r)
+		);
 }
 
 template <class T, class BaseOperation>
@@ -127,6 +132,7 @@ template <class T, class BaseOperation>
 void SegmentTree<T, BaseOperation>::set (li v, li left_responsibility, li right_responsibility, li index, const T& value)
 {
 
+	update_value(value);
 }
 
 
