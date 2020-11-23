@@ -245,36 +245,50 @@ using MinSegmentTree = SegmentTree<T, MinOperation<T>>;
 ///				The actual solution				/////////////
 /////////////////////////////////////////////////////////////
 
-int main() {
-	std::ifstream in("sum.in");
-	std::ofstream out("sum.out");
+constexpr li max_n = 1e5 + 2;
+
+int main()
+{
+	std::ifstream in("rvq.in");
+	std::ofstream out("rvq.out");
 
 	assert(in.is_open());
 	assert(out.is_open());
 
-	li n, k;
-	in >> n >> k;
+	std::vector<li> arr(max_n);
+	li arr_index = 0;
+	std::generate(arr.begin(), arr.end(), [&arr_index](){
+		li this_n = arr_index + 1;
+		arr_index++;
+		return (this_n * this_n) % 12345 + (this_n * this_n * this_n) % 23456;
+	});
 
-	std::vector<li> arr(k, 0);
+	// std::cout << std::vector<li>(arr.begin(), arr.begin() + 100) << std::endl;
 
-	SumSegmentTree<li> tree(arr);
+	MaxSegmentTree<li> max_tree(arr);
+	MinSegmentTree<li> min_tree(arr);
+
+	li k;
+	in >> k;
 
 	for (size_t i = 0; i < k; ++i) {
-		char query_name;
-		li l, r;
+		li first, second;
+		in >> first >> second;
 
-		in >> query_name >> l >> r;
+		if (first > 0) {
+			li index_first = first - 1;
+			li index_second = second;
 
-		if (query_name == 'A') {
-			tree.set(l - 1, r);
-		}
-		else if (query_name == 'Q') {
-			out << tree.compute(l - 1, r) << std::endl;
+			auto max_val = max_tree.compute(index_first, index_second);
+			auto min_val = min_tree.compute(index_first, index_second);
+
+			out << (max_val - min_val) << std::endl;
 		}
 		else {
-			throw std::runtime_error("");
+			li index = -first - 1;
+
+			max_tree.set(index, second);
+			min_tree.set(index, second);
 		}
 	}
-
-	return 0;
 }

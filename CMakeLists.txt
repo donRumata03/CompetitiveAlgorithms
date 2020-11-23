@@ -18,5 +18,8 @@ add_executable(CompetitiveAlgorithms
 
 project(the_task)
 add_executable(the_task
-        task_solutions/segment_tree_A.cpp
-)
+
+        # task_solutions/segment_tree_A.cpp
+        task_solutions/segment_tree_B.cpp
+
+        )
