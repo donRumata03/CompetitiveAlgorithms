@@ -134,7 +134,7 @@ void SegmentTree<T, BaseOperation>::set (li v, li left_responsibility, li right_
 {
 	if (left_responsibility + 1 == right_responsibility) {
 		assert(left_responsibility == index);
-		tree[left_responsibility] = value;
+		tree[v] = value;
 	}
 	else {
 		li mid = (left_responsibility + right_responsibility) / 2;
@@ -145,7 +145,7 @@ void SegmentTree<T, BaseOperation>::set (li v, li left_responsibility, li right_
 		else {
 			set(right_child(v), mid, right_responsibility, index, value);
 		}
-		update_value(value);
+		update_value(v);
 	}
 }
 

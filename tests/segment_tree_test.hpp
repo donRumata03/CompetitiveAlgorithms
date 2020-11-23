@@ -150,7 +150,7 @@ inline void stree_setting_test_base(const std::vector<li>& test_vector, const st
 		std::cout << "tree.get(" << query.first << ") = " << tree.get(query.first) << " (expected: " << non_const_vector[query.first] << ") => "
 		<< (non_const_vector[query.first] == tree.get(query.first) ? "RIGHT" : "WRONG") << std::endl;
 
-		assert(tree.sum(0, test_vector.size()) == sum);
+		std::cout << "sum is: " << tree.sum(0, test_vector.size()) << ", expected: " << sum << std::endl;
 	}
 }
 
