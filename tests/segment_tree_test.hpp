@@ -169,3 +169,30 @@ inline void stree_setting_test3() {
 
 	stree_setting_test_base(test_vector, queries);
 }
+
+//////////////////////////////////////////////////////////////
+///// 						Min trees				//////////
+//////////////////////////////////////////////////////////////
+
+
+inline void test_min_and_max_stree() {
+	std::vector<li> test_vector = {
+		1, 2, 3, 4, 5, 6, 7
+	};
+
+	std::vector<std::tuple<bool, li, li>> requests = {
+		// False for set, True for compute
+
+			{ true, 0, 2 },
+			{  }
+	};
+
+	MinSegmentTree<li> min_tree(test_vector);
+	MaxSegmentTree<li> max_tree(test_vector);
+
+	for (auto& query : requests) {
+		if (std::get<0>(query)) {
+			std::cout << "Max [" << std::get<1>(query) << "; " << std::get<2>(query) << ") is " <<
+		}
+	}
+}
