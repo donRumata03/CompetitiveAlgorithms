@@ -11,4 +11,12 @@ add_executable(CompetitiveAlgorithms
         data_structures/segment_tree.hpp
         tests/segment_tree_test.hpp
 
-        olymp_funcions.hpp)
+        olymp_funcions.hpp
+
+        )
+
+
+project(the_task)
+add_executable(the_task
+        task_solutions/segment_tree_A.cpp
+)

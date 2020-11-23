@@ -33,7 +33,7 @@ inline void stree_sum_test_base(const std::vector<li>& test_vector, const std::v
 	SumSegmentTree<li> tree(test_vector);
 
 	for (auto& test_case : test_cases) {
-		li answer = tree.sum(test_case.first, test_case.second);
+		li answer = tree.compute(test_case.first, test_case.second);
 		li right_answer = std::accumulate(test_vector.begin() + test_case.first, test_vector.begin() + test_case.second, 0LL);
 
 		std::cout << test_case << " : "
@@ -150,7 +150,7 @@ inline void stree_setting_test_base(const std::vector<li>& test_vector, const st
 		std::cout << "tree.get(" << query.first << ") = " << tree.get(query.first) << " (expected: " << non_const_vector[query.first] << ") => "
 		<< (non_const_vector[query.first] == tree.get(query.first) ? "RIGHT" : "WRONG") << std::endl;
 
-		std::cout << "sum is: " << tree.sum(0, test_vector.size()) << ", expected: " << sum << std::endl;
+		std::cout << "sum is: " << tree.compute(0, test_vector.size()) << ", expected: " << sum << std::endl;
 	}
 }
 

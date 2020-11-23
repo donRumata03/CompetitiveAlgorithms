@@ -17,7 +17,7 @@ public:
 	SegmentTree() = delete;
 	explicit SegmentTree(const std::vector<T>& initial_data);
 
-	T sum(li l, li r); // sum of array[l, r)
+	T compute(li l, li r); // sum of array[l, r)
 	T get(li index) { return get(0, 0, n, index); }
 	void set(li index, const T& value) { set(0, 0, n, index, value); }
 
@@ -29,7 +29,7 @@ private:
 
 
 	void build (const std::vector<T>& initial_data, li v, li left_responsibility, li right_responsibility);
-	T sum (li v, li left_responsibility, li right_responsibility, li l, li r);
+	T compute (li v, li left_responsibility, li right_responsibility, li l, li r);
 
 	T get(li v, li left_responsibility, li right_responsibility, li index);
 	void set(li v, li left_responsibility, li right_responsibility, li index, const T& value);
@@ -60,9 +60,9 @@ template <class T, class BaseOperation>
 void SegmentTree<T, BaseOperation>::build (const std::vector<T>& initial_data, li v, li left_responsibility,
                                            li right_responsibility)
 {
-	std::cout << "Vertex: " << v
-		<< " : [" << left_responsibility << "; " << right_responsibility << ")"
-	<< std::endl;
+	// std::cout << "Vertex: " << v
+	// 	<< " : [" << left_responsibility << "; " << right_responsibility << ")"
+	// << std::endl;
 
 	if (left_responsibility + 1 == right_responsibility) {
 		tree[v] = initial_data[left_responsibility];
@@ -79,13 +79,13 @@ void SegmentTree<T, BaseOperation>::build (const std::vector<T>& initial_data, l
 }
 
 template <class T, class BaseOperation>
-T SegmentTree<T, BaseOperation>::sum (li l, li r)
+T SegmentTree<T, BaseOperation>::compute (li l, li r)
 {
-	return sum(0, 0, n, l, r);
+	return compute(0, 0, n, l, r);
 }
 
 template <class T, class BaseOperation>
-T SegmentTree<T, BaseOperation>::sum (li v, li left_responsibility, li right_responsibility, li l, li r)
+T SegmentTree<T, BaseOperation>::compute (li v, li left_responsibility, li right_responsibility, li l, li r)
 {
 	if (l >= r) return BaseOperation::default_value();
 
@@ -100,18 +100,18 @@ T SegmentTree<T, BaseOperation>::sum (li v, li left_responsibility, li right_res
 
 	// If it's fully covered by the left child:
 	if (r <= mid) { // [l, r) is in [left_responsibility, mid)
-		return sum(left_child(v), left_responsibility, mid, l, r);
+		return compute(left_child(v), left_responsibility, mid, l, r);
 	}
 	// If it's fully covered by the right child:
 	if (l >= mid) { // [l, r) is in [left_responsibility, mid)
-		return sum(right_child(v), mid, right_responsibility, l, r);
+		return compute(right_child(v), mid, right_responsibility, l, r);
 	}
 
 	// Divide the segment into two parts:
 	return
 		BaseOperation::compute(
-				sum(left_child(v), left_responsibility, mid, l, mid),
-				sum(right_child(v), mid, right_responsibility, mid, r)
+				compute(left_child(v), left_responsibility, mid, l, mid),
+				compute(right_child(v), mid, right_responsibility, mid, r)
 		);
 }
 
