@@ -263,7 +263,7 @@ int main()
 		return (this_n * this_n) % 12345 + (this_n * this_n * this_n) % 23456;
 	});
 
-	// std::cout << std::vector<li>(arr.begin(), arr.begin() + 100) << std::endl;
+	// std::cout << std::vector<li>(arr.begin(), arr.begin() + 10) << std::endl;
 
 	MaxSegmentTree<li> max_tree(arr);
 	MinSegmentTree<li> min_tree(arr);
