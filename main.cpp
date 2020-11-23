@@ -11,8 +11,9 @@ int main ()
 	// stree_getting_test3();
 	// stree_getting_test8();
 
+	// stree_setting_test3();
 
-	stree_setting_test3();
+	test_min_and_max_stree();
 
 	return 0;
 }

@@ -177,22 +177,64 @@ inline void stree_setting_test3() {
 
 inline void test_min_and_max_stree() {
 	std::vector<li> test_vector = {
-		1, 2, 3, 4, 5, 6, 7
+		1, 5, 2, 3, 6, 4, 7
 	};
 
 	std::vector<std::tuple<bool, li, li>> requests = {
 		// False for set, True for compute
 
 			{ true, 0, 2 },
-			{  }
+			{ true, 0, 7 },
+			{ true, 1, 5 },
+			{ true, 3, 7 },
+			{ true, 2, 4 },
+			{ true, 3, 4 },
+			{ true, 3, 6 },
+
+			{ false, 6, 0 },
+			{ false, 1, 0 },
+
+			{ true, 0, 2 },
+			{ true, 0, 7 },
+			{ true, 1, 5 },
+			{ true, 3, 7 },
+			{ true, 2, 4 },
+			{ true, 3, 4 },
+			{ true, 3, 6 },
 	};
 
 	MinSegmentTree<li> min_tree(test_vector);
 	MaxSegmentTree<li> max_tree(test_vector);
 
 	for (auto& query : requests) {
-		if (std::get<0>(query)) {
-			std::cout << "Max [" << std::get<1>(query) << "; " << std::get<2>(query) << ") is " <<
+		const auto& [to_compute, l, r]  = query;
+
+		if (to_compute) {
+			auto max_answer = max_tree.compute(l, r);
+			auto right_max_answer = std::accumulate(test_vector.begin() + l, test_vector.begin() + r,
+			                                        MaxOperation<li>::default_value(), MaxOperation<li>::compute);
+
+			std::cout << "Max [" << l << "; " << r << ") is "
+			          << max_answer << " (should be: "
+			          << right_max_answer << " => " << (max_answer == right_max_answer ? "RIGHT" : "WRONG")
+			          << ")" << std::endl;
+
+
+			auto min_answer = min_tree.compute(l, r);
+			auto right_min_answer = std::accumulate(test_vector.begin() + l, test_vector.begin() + r,
+			                                        MinOperation<li>::default_value(), MinOperation<li>::compute);
+
+			std::cout << "Min [" << l << "; " << r << ") is "
+			          << min_answer << " (should be: "
+			          << right_min_answer << " => " << (min_answer == right_min_answer ? "RIGHT" : "WRONG")
+			          << ")" << std::endl;
+			std::cout << "____________________________________" << std::endl;
+		}
+		else {
+			test_vector.at(l) = r;
+
+			min_tree.set(l, r);
+			max_tree.set(l, r);
 		}
 	}
 }
