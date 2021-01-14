@@ -14,6 +14,9 @@
 #include <fstream>
 
 
+using li = long long int;
+
+
 template<class FirstT, class SecondT>
 std::ostream& operator << (std::ostream& os, const std::pair<FirstT, SecondT>& pair) {
 	os << "(" << pair.first << ", " << pair.second << ")";
@@ -24,7 +27,11 @@ std::ostream& operator << (std::ostream& os, const std::pair<FirstT, SecondT>& p
 
 template<class T>
 std::ostream& operator << (std::ostream& os, const std::vector<T>& vector) {
-	for (auto& v: vector) os << v << " ";
+	// for (auto& v: vector) os << v << " ";
+	for (size_t i = 0; i < vector.size(); ++i) {
+		os << vector[i];
+		if (i != vector.size() - 1) os << " ";
+	}
 
 	return os;
 }

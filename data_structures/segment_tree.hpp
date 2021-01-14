@@ -6,7 +6,7 @@
 
 #include "olymp_funcions.hpp"
 
-using li = long long int;
+// using li = long long int;
 
 
 
