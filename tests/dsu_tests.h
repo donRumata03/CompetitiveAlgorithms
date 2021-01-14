@@ -6,6 +6,8 @@
 
 
 #include <data_structures/DSU.h>
+#include <chrono>
+#include <random>
 
 inline void output_dsu(const DSU& dsu) {
 	std::cout << "Size: " << dsu.size() << std::endl;
@@ -54,8 +56,54 @@ inline void test_dsu_working_ability() {
 }
 
 
+double measure_DSU_time(li n) {
+	li repetitions = 10;
+	li operations = li(std::round(n * 2.));
+
+	// Generate queries:
+	std::vector<std::pair<li, li>> queries(operations);
+	auto gen = std::mt19937_64 { std::random_device{}() };
+	auto rand_element = [&gen, &n]() -> li { return gen() % n; };
+	std::generate(queries.begin(), queries.end(), [&rand_element](){
+		return std::pair{ rand_element(), rand_element() };
+	});
+
+	auto starting_time = std::chrono::high_resolution_clock::now();
+
+	for (size_t repetition = 0; repetition < repetitions; ++repetition) {
+		DSU dsu(n);
+		for (size_t i = 0; i < operations; ++i) {
+			dsu.unite(queries[i].first, queries[i].second);
+		}
+	}
+	std::chrono::nanoseconds time_elapsed = std::chrono::high_resolution_clock::now() - starting_time;
+	double ns_per_one_iteration = time_elapsed.count() / (repetitions * operations);
+
+	return ns_per_one_iteration;
+}
 
 inline void test_dsu_computational_complexity() {
+	li N = 10'000'000;
 
+//	std::cout << measure_DSU_time(N / 10) << std::endl;
+//	std::cout << measure_DSU_time(N / 5) << std::endl;
+//	std::cout << measure_DSU_time(N / 2) << std::endl;
+//	std::cout << measure_DSU_time(N) << std::endl;
+
+
+	std::vector<double> Ns = {
+			N / 10., N / 9., N / 8., N / 7., N / 5., N / 4., N / 3., N / 2., N / 1.
+	};
+	std::vector<double> times = {
+
+	};
+
+	for(auto& n : Ns) {
+		times.push_back(measure_DSU_time(li(n)));
+
+	}
+
+	std::cout << std::fixed << Ns << std::endl;
+	std::cout << times << std::endl;
 }
 

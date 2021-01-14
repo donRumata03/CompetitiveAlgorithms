@@ -21,7 +21,8 @@ int main ()
 
 	/// DSU:
 
-	test_dsu_working_ability();
+	// test_dsu_working_ability();
+	test_dsu_computational_complexity();
 
 	return 0;
 }
