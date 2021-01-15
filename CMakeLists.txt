@@ -11,9 +11,9 @@ add_executable(CompetitiveAlgorithms
         data_structures/segment_tree.hpp
         tests/segment_tree_test.hpp
 
-        olymp_funcions.hpp
+        olymp_functions.hpp
 
-        data_structures/DSU.h tests/dsu_tests.h algorithms/cruscal.h data_structures/graphs.h)
+        data_structures/DSU.h tests/dsu_tests.h algorithms/cruscal.h data_structures/graphs.h numeric/factorization.h numeric/eratosphene_sieve.h tests/factorization_tests.h)
 
 
 project(the_task)

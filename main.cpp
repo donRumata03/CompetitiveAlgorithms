@@ -3,6 +3,7 @@
 
 #include <data_structures/DSU.h>
 #include <tests/dsu_tests.h>
+#include <tests/factorization_tests.h>
 
 int main ()
 {
@@ -22,7 +23,12 @@ int main ()
 	/// DSU:
 
 	// test_dsu_working_ability();
-	test_dsu_computational_complexity();
+	// test_dsu_computational_complexity();
+
+	/// Graphs:
+
+	/// Numeric:
+	test_eratosphene_factorization();
 
 	return 0;
 }

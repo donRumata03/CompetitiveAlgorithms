@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "olymp_funcions.hpp"
+#include "olymp_functions.hpp"
 
 // using li = long long int;
 
