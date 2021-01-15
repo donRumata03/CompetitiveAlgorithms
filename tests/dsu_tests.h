@@ -75,6 +75,7 @@ double measure_DSU_time(li n) {
 		for (size_t i = 0; i < operations; ++i) {
 			dsu.unite(queries[i].first, queries[i].second);
 		}
+		std::cout << dsu.dump_sets().size() << " sets total (of " << n << ")" << std::endl;
 	}
 	std::chrono::nanoseconds time_elapsed = std::chrono::high_resolution_clock::now() - starting_time;
 	double ns_per_one_iteration = time_elapsed.count() / (repetitions * operations);

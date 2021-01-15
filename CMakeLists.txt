@@ -13,7 +13,7 @@ add_executable(CompetitiveAlgorithms
 
         olymp_funcions.hpp
 
-        data_structures/DSU.h tests/dsu_tests.h)
+        data_structures/DSU.h tests/dsu_tests.h algorithms/cruscal.h data_structures/graphs.h)
 
 
 project(the_task)
