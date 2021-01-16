@@ -8,7 +8,7 @@
 #include <data_structures/DSU.h>
 
 template<class WeightType>
-std::vector<std::vector<std::pair<li, WeightType>>> cruscal_find_mst(const std::vector<std::vector<std::pair<li, WeightType>>>& graph) {
+std::vector<base_edge<WeightType>> cruscal_find_mst(const std::vector<std::vector<std::pair<li, WeightType>>>& graph) {
 	li vertexes = graph.size();
 	std::vector<base_edge<WeightType>> edge_list;
 
@@ -33,11 +33,11 @@ std::vector<std::vector<std::pair<li, WeightType>>> cruscal_find_mst(const std::
 		}
 	}
 
-	/// Convert backwards:
-	std::vector<std::vector<std::pair<li, WeightType>>> res(vertexes);
-	for (auto& edge: mst_edges) {
-		res[edge.first].push_back({ edge.second, edge.weight });
-	}
+//	/// Convert backwards:
+//	std::vector<std::vector<std::pair<li, WeightType>>> res(vertexes);
+//	for (auto& edge: mst_edges) {
+//		res[edge.first].push_back({ edge.second, edge.weight });
+//	}
 
-	return res;
+	return mst_edges;
 }
