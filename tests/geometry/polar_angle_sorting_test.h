@@ -36,8 +36,10 @@ inline void test_sorting_by_polar_angle() {
 			{6, -4}
 	};
 	std::shuffle(test_points.begin(), test_points.end(), std::mt19937{ std::random_device{}() });
+	std::cout << "Before: " << test_points << std::endl;
+	std::cout << "___________________________________" << std::endl;
 
 	auto res = sort_by_polar_angle(target_point, test_points);
-	std::cout << res << std::endl;
+	std::cout << "After: " << res << std::endl;
 
 }
