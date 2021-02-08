@@ -27,6 +27,16 @@ struct base_point {
 //	operator base_point<double> () {
 //		return
 //	}
+	bool operator== (const base_point& rhs) const
+	{
+		return x == rhs.x &&
+		       y == rhs.y;
+	}
+
+	bool operator!= (const base_point& rhs) const
+	{
+		return !(rhs == *this);
+	}
 };
 
 using point_d = base_point<double>;
