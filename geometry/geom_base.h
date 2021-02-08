@@ -52,7 +52,7 @@ T cross_product(base_point<T> first, base_point<T> second) {
 
 // ________________________________________________________________________________
 
-base_point<double> line_intersection(double k1, double b1, double k2, double b2) {
+inline base_point<double> line_intersection(double k1, double b1, double k2, double b2) {
 	double x = (b2 - b1) / (k1 - k2);
 	double y = b1 + k1 * x;
 
@@ -67,7 +67,7 @@ std::pair<double, double> line_by_points(base_point<T> first, base_point<T> seco
 	return { k, b };
 }
 
-std::optional<point_d> line_intersection(point_i l11, point_i l12, point_i l21, point_i l22) {
+inline std::optional<point_d> line_intersection(point_i l11, point_i l12, point_i l21, point_i l22) {
 	if (cross_product(l11 - l12, l21 - l22) == 0) {
 		return {};
 	}
@@ -93,11 +93,11 @@ std::optional<point_d> line_intersection(point_i l11, point_i l12, point_i l21, 
 }
 
 
-bool point_on_line(point_i pnt, point_i lp1, point_i lp2) {
+inline bool point_on_line(point_i pnt, point_i lp1, point_i lp2) {
 	return cross_product(lp2 - lp1, pnt - lp1) == 0;
 }
 
-bool point_in_segment(point_i pnt, point_i sp1, point_i sp2) {
+inline bool point_in_segment(point_i pnt, point_i sp1, point_i sp2) {
 	// Check if the point lies on the right line:
 	// &&
 	// Check the in this segment:
@@ -112,28 +112,28 @@ bool point_in_segment(point_i pnt, point_i sp1, point_i sp2) {
 	// return dot_product(sp1 - pnt, sp2 - pnt) <= 0;
 }
 
-bool point_on_ray(point_i pnt, point_i rp1, point_i rp2) {
+inline bool point_on_ray(point_i pnt, point_i rp1, point_i rp2) {
 	return point_on_line(pnt, rp1, rp2) and (dot_product(rp2 - rp1, pnt - rp1) >= 0);
 }
 
 /// _________________________________________________________________________________________
 
-bool point_on_line(point_d pnt, point_d lp1, point_d lp2) {
+inline bool point_on_line(point_d pnt, point_d lp1, point_d lp2) {
 	return std::abs(cross_product(lp2 - lp1, pnt - lp1)) <= geometry_epsilon;
 }
 
-bool point_in_segment(point_d pnt, point_d sp1, point_d sp2) {
+inline bool point_in_segment(point_d pnt, point_d sp1, point_d sp2) {
 	return point_on_line(pnt, sp1, sp2) and (dot_product(sp1 - pnt, sp2 - pnt) <= geometry_epsilon);
 }
 
-bool point_on_ray(point_d pnt, point_d rp1, point_d rp2) {
+inline bool point_on_ray(point_d pnt, point_d rp1, point_d rp2) {
 	return point_on_line(pnt, rp1, rp2) and (dot_product(rp2 - rp1, pnt - rp1) >= -geometry_epsilon);
 }
 
 /// _________________________________________________________________________________________
 
 
-bool ray_intersects_segment(point_i rp1, point_i rp2, point_i sp1, point_i sp2) {
+inline bool ray_intersects_segment(point_i rp1, point_i rp2, point_i sp1, point_i sp2) {
 	// if they are parallel:
 //	if (dot_product(rp1 - rp2, sp1 - sp2) == 0) {
 //		return false;

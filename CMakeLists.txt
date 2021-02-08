@@ -13,7 +13,7 @@ add_executable(CompetitiveAlgorithms
 
         olymp_functions.hpp
 
-        data_structures/DSU.h tests/dsu_tests.h graphs/cruscal.h data_structures/graphs.h numeric/factorization.h numeric/eratosphene_sieve.h tests/factorization_tests.h graphs/graph_is_connected.h geometry/geom_base.h)
+        data_structures/DSU.h tests/dsu_tests.h graphs/cruscal.h data_structures/graphs.h numeric/factorization.h numeric/eratosphene_sieve.h tests/factorization_tests.h graphs/graph_is_connected.h geometry/geom_base.h geometry/point_in_polygon.h geometry/polar_angle_sort.h)
 
 
 project(the_task)
