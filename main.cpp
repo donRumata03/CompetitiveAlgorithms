@@ -4,6 +4,7 @@
 #include <data_structures/DSU.h>
 #include <tests/dsu_tests.h>
 #include <tests/factorization_tests.h>
+#include <tests/geometry/polar_angle_sorting_test.h>
 
 int main ()
 {
@@ -27,8 +28,12 @@ int main ()
 
 	/// Graphs:
 
+
 	/// Numeric:
-	test_eratosphene_factorization();
+	// test_eratosphene_factorization();
+
+	/// Geometry:
+	test_sorting_by_polar_angle();
 
 	return 0;
 }

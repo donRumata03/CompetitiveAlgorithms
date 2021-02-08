@@ -34,6 +34,16 @@ using point_i = base_point<li>;
 
 
 template<class T>
+std::ostream& operator << (std::ostream& os, const base_point<T>& point) {
+	os << "{ " << point.x << ", " << point.y << "}";
+
+	return os;
+}
+
+
+/// ________________________________________________________________________________
+
+template<class T>
 point_d to_point_d(base_point<T> pnt) {
 	return { double(pnt.x), double(pnt.y) };
 }
@@ -50,7 +60,7 @@ T cross_product(base_point<T> first, base_point<T> second) {
 	return first.x * second.y - first.y * second.x;
 }
 
-// ________________________________________________________________________________
+/// ________________________________________________________________________________
 
 inline base_point<double> line_intersection(double k1, double b1, double k2, double b2) {
 	double x = (b2 - b1) / (k1 - k2);
