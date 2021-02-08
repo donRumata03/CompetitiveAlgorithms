@@ -8,7 +8,7 @@
 #include "geom_base.h"
 #include "polar_angle_sort.h"
 
-point_i get_safe_ray_point(point_i point, const std::vector<point_i>& polygon) {
+inline point_i get_safe_ray_point(point_i point, const std::vector<point_i>& polygon) {
 	assert(polygon.size() >= 2);
 
 	auto polar_angle_sorted = sort_by_polar_angle(point, polygon);

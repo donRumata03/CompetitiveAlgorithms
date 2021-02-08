@@ -22,4 +22,4 @@ add_executable(the_task
         # task_solutions/segment_tree_A.cpp
         # task_solutions/segment_tree_B.cpp
 
-        task_solutions/cruscal.cpp)
+        task_solutions/cruscal.cpp tests/geometry/polar_angle_sorting_test.h)
