@@ -80,3 +80,15 @@ inline void test_on_ray() {
 	std::cout << point_on_ray(point_d{2, 3.}, {-3.5, -2.5}, {3.5, 2.5}) << std::endl;
 	std::cout << point_on_ray(point_d{-6, -2}, {-3.5, -2.5}, {3.5, 2.5}) << std::endl;
 }
+
+inline void test_simple_line_intersection() {
+	// double k1 = 3.5, b1 = 10;
+	// double k2 = -0.5, b2 = 3;
+
+	auto [k1, b1] = line_by_points(point_d{2., 17.}, {-2., 3.});
+	auto [k2, b2] = line_by_points(point_d{2., 2.}, {-4., 5.});
+
+	// (-1.75, 3.875)
+
+	std::cout << line_intersection(k1, b1, k2, b2) << std::endl;
+}
