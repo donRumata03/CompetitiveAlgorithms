@@ -30,8 +30,16 @@ add_executable(CompetitiveAlgorithms
         geometry/polar_angle_sort.h
         tests/geometry/polar_angle_sorting_test.h
 
-        geometry/convex_hull.h tests/geometry/convex_hull_test.h tests/geometry/test_data.h geometry/polygon_area.h tests/geometry/area_test.h)
+        geometry/convex_hull.h
+        tests/geometry/convex_hull_test.h
+        tests/geometry/test_data.h
 
+        geometry/polygon_area.h
+        tests/geometry/area_test.h
+        )
+
+
+set(CMAKE_CXX_STANDARD 14)
 
 project(the_task)
 add_executable(the_task
@@ -40,5 +48,9 @@ add_executable(the_task
         # task_solutions/segment_tree_B.cpp
 
         # task_solutions/cruscal.cpp
-        task_solutions/geometry/testing_point_in_polygon.cpp
+
+        # task_solutions/geometry/testing_point_in_polygon.cpp
+
+        task_solutions/geometry/geometry_header.h
+        task_solutions/geometry/polygon_area.cpp
         )
