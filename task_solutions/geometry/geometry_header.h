@@ -56,7 +56,7 @@ T square(T number) {
 
 /// 												Floating Point Utilities:
 
-template <class Float, std::enable_if_t<std::is_floating_point_v<Float>, void*> nothing = nullptr>
+template <class Float, typename std::enable_if<std::is_floating_point<Float>::value, void*>::type nothing = nullptr>
 bool almost_equal(Float float1, Float float2, Float relative_eps = 1e-10, Float absolute_eps = 1e-15) {
 	if (float1 == float2) return true;
 	if ((float1 + float2) == 0) return false;
@@ -78,12 +78,28 @@ struct base_point {
 	T x {};
 	T y {};
 
+	static base_point<T> make_point (T first, T second) {
+		base_point<T> res;
+		res.x = first;
+		res.y = second;
+		return res;
+	}
+
+	static base_point<T>* make_heap_point (T first, T second) {
+		auto* res = new base_point<T>{};
+		res->x = first;
+		res->y = second;
+		return res;
+	}
+
 	friend base_point<T> operator- (base_point<T> p1, base_point<T> p2) {
-		return { p1.x - p2.x, p1.y - p2.y };
+		// using type = base_point<T>;
+		return make_point(p1.x - p2.x, p1.y - p2.y);
 	}
 
 	friend base_point<T> operator+ (base_point<T> p1, base_point<T> p2) {
-		return { p1.x + p2.x, p1.y + p2.y };
+		using type = base_point<T>;
+		return make_point(p1.x + p2.x, p1.y + p2.y);
 	}
 
 //	template<typename std::enable_if<!std::is_same_v<double, T>, void*>::type = nullptr>
@@ -109,6 +125,8 @@ struct base_point {
 	}
 };
 
+
+
 using point_d = base_point<double>;
 using point_i = base_point<li>;
 
@@ -125,7 +143,8 @@ std::ostream& operator << (std::ostream& os, const base_point<T>& point) {
 
 template<class T>
 point_d to_point_d(base_point<T> pnt) {
-	return { double(pnt.x), double(pnt.y) };
+	point_d res = base_point<double>::make_point(double(pnt.x), double(pnt.y));
+	return res;
 }
 
 
@@ -146,7 +165,10 @@ inline base_point<double> line_intersection(double k1, double b1, double k2, dou
 	double x = (b2 - b1) / (k1 - k2);
 	double y = b1 + k1 * x;
 
-	return { x, y };
+	auto res = point_d{};
+	res.x = x;
+	res.y = y;
+	return res;
 }
 
 template<class T>
@@ -157,7 +179,7 @@ std::pair<double, double> line_by_points(base_point<T> first, base_point<T> seco
 	return { k, b };
 }
 
-inline std::optional<point_d> line_intersection(point_i l11, point_i l12, point_i l21, point_i l22) {
+inline point_d* line_intersection(point_i l11, point_i l12, point_i l21, point_i l22) {
 	if (cross_product(l11 - l12, l21 - l22) == 0) {
 		return {};
 	}
@@ -169,16 +191,23 @@ inline std::optional<point_d> line_intersection(point_i l11, point_i l12, point_
 			std::swap(l11, l22);
 		}
 
-		return point_d{
+		return base_point<double>::make_heap_point(
 				double(l11.x),
 				double(l21.y) + (l11.x - l21.x) * (double((l21.y - l22.y)) / (l21.x - l22.x))
-		};
+		);
 	}
 	else {
-		auto[k1, b1] = line_by_points(l11, l12);
-		auto[k2, b2] = line_by_points(l21, l22);
+		auto r1 = line_by_points(l11, l12);
+		auto r2 = line_by_points(l21, l22);
 
-		return line_intersection(k1, b1, k2, b2);
+		auto k1 = r1.first;
+		auto b1 = r1.second;
+
+		auto k2 = r2.first;
+		auto b2 = r2.second;
+
+
+		return new point_d {line_intersection(k1, b1, k2, b2)};
 	}
 }
 
@@ -427,10 +456,3 @@ double count_polygon_area(const std::vector<base_point<T>>& polygon) {
 
 	return std::abs(area);
 }
-
-/// ______________________________				polar_angle_sort:			______________________________
-/// ______________________________				polar_angle_sort:			______________________________
-/// ______________________________				polar_angle_sort:			______________________________
-
-
-
