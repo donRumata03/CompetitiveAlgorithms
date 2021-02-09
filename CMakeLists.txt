@@ -36,7 +36,7 @@ add_executable(CompetitiveAlgorithms
 
         geometry/polygon_area.h
         tests/geometry/area_and_perimeter_test.h
-        geometry/polygon_perimeter.h)
+        geometry/polygon_perimeter.h tests/geometry/point_in_polygon_testing.h tests/geometry/base_util_tests.h)
 
 
 set(CMAKE_CXX_STANDARD 14)
@@ -53,6 +53,6 @@ add_executable(the_task
 
         task_solutions/geometry/geometry_header.h
         # task_solutions/geometry/polygon_area.cpp
-        task_solutions/geometry/convex_hull.cpp
+        # task_solutions/geometry/convex_hull.cpp
 
-        )
+        task_solutions/geometry/point_in_polygon.cpp)

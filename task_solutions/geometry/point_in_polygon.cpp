@@ -2,8 +2,8 @@
 // Created by Vova on 09.02.2021.
 //
 
-#pragma once
 
+// #include "geometry_header.h"
 /// ______________________________				Olymp functions:			______________________________
 
 
@@ -624,3 +624,32 @@ inline bool point_in_polygon(point_i point, const std::vector<point_i>& polygon)
 /// ______________________________				polygon_area:			______________________________
 /// ______________________________				polygon_area:			______________________________
 
+
+
+
+
+///// ______________________					Main function			______________________:
+
+
+int main() {
+
+	li n;
+	point_i point;
+	std::vector<base_point<li>> polygon;
+
+	std::cin >> n;
+	std::cin >> point.x >> point.y;
+	for (size_t i = 0; i < n; ++i) {
+		polygon.emplace_back();
+		std::cin >> polygon.back().x >> polygon.back().y;
+	}
+
+	if (point_in_polygon(point, polygon)) {
+		std::cout << "YES" << std::endl;
+	}
+	else {
+		std::cout << "NO" << std::endl;
+	}
+
+	return 0;
+}
