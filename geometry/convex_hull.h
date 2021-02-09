@@ -13,7 +13,8 @@
 
 template<class T>
 void pop_second(std::vector<base_point<T>>& stack) {
-	auto top = stack.pop_back();
+	auto top = stack.back();
+	stack.pop_back();
 	stack.pop_back();
 	stack.push_back(top);
 }
@@ -101,7 +102,7 @@ std::vector<base_point<T>> find_convex_hull(const std::vector<base_point<T>>& po
 	for (auto& other_point : other_points) {
 		add_point_to_convex_hull_with_reduction(first_point, convex_hull, other_point);
 	}
-	add_point_to_convex_hull_with_reduction(convex_hull, first_point);
+	add_point_to_convex_hull_with_reduction(first_point, convex_hull, first_point);
 	convex_hull.pop_back();
 
 	return convex_hull;

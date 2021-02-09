@@ -44,6 +44,12 @@ std::ostream& operator << (std::ostream& os, const std::vector<T>& vector) {
 }
 
 
+/// 														Numeric:
+template<class T>
+T square(T number) {
+	return number * number;
+}
+
 
 /// 												Floating Point Utilities:
 
