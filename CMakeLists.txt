@@ -30,7 +30,7 @@ add_executable(CompetitiveAlgorithms
         geometry/polar_angle_sort.h
         tests/geometry/polar_angle_sorting_test.h
 
-        geometry/convex_hull.h tests/geometry/convex_hull_test.h tests/geometry/test_data.h)
+        geometry/convex_hull.h tests/geometry/convex_hull_test.h tests/geometry/test_data.h geometry/polygon_area.h tests/geometry/area_test.h)
 
 
 project(the_task)

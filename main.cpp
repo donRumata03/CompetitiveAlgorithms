@@ -6,9 +6,13 @@
 #include <tests/factorization_tests.h>
 #include <tests/geometry/polar_angle_sorting_test.h>
 #include <tests/geometry/convex_hull_test.h>
+#include <tests/geometry/area_test.h>
 
 int main ()
 {
+	system("chcp 65001");
+	system("cls");
+
 	/// Segment Tree:
 
 	// stree_building_test();
@@ -35,7 +39,8 @@ int main ()
 
 	/// Geometry:
 	// test_sorting_by_polar_angle();
-	test_convex_hull();
+	// test_convex_hull();
+	test_area_counting();
 
 	return 0;
 }
