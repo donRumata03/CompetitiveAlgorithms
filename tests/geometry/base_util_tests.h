@@ -92,3 +92,10 @@ inline void test_simple_line_intersection() {
 
 	std::cout << line_intersection(k1, b1, k2, b2) << std::endl;
 }
+
+inline void test_strange_line_intersections() {
+	// (4., 3.5)
+	std::cout << *line_intersection(
+			point_i{3, 3}, {-3, 0}, {4, -1}, {4, 198}
+			) << std::endl;
+}

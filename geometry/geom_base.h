@@ -106,12 +106,15 @@ inline std::optional<point_d> line_intersection(point_i l11, point_i l12, point_
 	if (l11.x == l12.x || l21.x == l22.x) {
 		if (l21.x == l22.x) {
 			std::swap(l11, l21);
-			std::swap(l11, l22);
+			std::swap(l12, l22);
 		}
+		// Here l1 is vertical, l2 is not!
+
+		double k2 = (double((l21.y - l22.y)) / (l21.x - l22.x));
 
 		return point_d{
 			double(l11.x),
-			double(l21.y) + (l11.x - l21.x) * (double((l21.y - l22.y)) / (l21.x - l22.x))
+			double(l21.y) + (l11.x - l21.x) * k2
 		};
 	}
 	else {

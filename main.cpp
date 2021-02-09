@@ -45,7 +45,8 @@ int main ()
 	// point_on_line_test();
 	// point_on_segment_test();
 	// test_on_ray();
-	test_simple_line_intersection();
+	// test_simple_line_intersection();
+	test_strange_line_intersections();
 
 	// test_sorting_by_polar_angle();
 	// test_convex_hull();
