@@ -99,7 +99,7 @@ std::vector<base_point<T>> find_convex_hull(const std::vector<base_point<T>>& po
 	std::vector<base_point<T>> convex_hull { first_point };
 
 	/// There should be clockwise turn everywhere:
-	for (auto& other_point : other_points) {
+	for (auto& other_point : other_sorted) {
 		add_point_to_convex_hull_with_reduction(first_point, convex_hull, other_point);
 	}
 	add_point_to_convex_hull_with_reduction(first_point, convex_hull, first_point);

@@ -10,7 +10,8 @@
 
 inline void test_sorting_by_polar_angle() {
 
-	point_i target_point = { 1, 1 };
+	// point_i target_point = { 1, 1 };
+	point_i target_point = { 1, -4 };
 
 	auto local_test_points = test_points;
 
