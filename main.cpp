@@ -43,7 +43,8 @@ int main ()
 	// are_parallel_test();
 	// are_co_directed_test();
 	// point_on_line_test();
-	point_on_segment_test();
+	// point_on_segment_test();
+	test_on_ray();
 
 	// test_sorting_by_polar_angle();
 	// test_convex_hull();

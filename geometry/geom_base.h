@@ -44,6 +44,9 @@ struct base_point {
 	static T sqr_dist(base_point<T> first, base_point<T> second) {
 		return square(first.x - second.x) + square(first.y - second.y);
 	}
+	static double dist(base_point<T> first, base_point<T> second) {
+		return std::sqrt(sqr_dist(first, second));
+	}
 };
 
 using point_d = base_point<double>;
