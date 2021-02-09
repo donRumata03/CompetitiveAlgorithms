@@ -40,7 +40,8 @@ int main ()
 	// test_eratosphene_factorization();
 
 	/// Geometry:
-	are_parallel_test();
+	// are_parallel_test();
+	are_co_directed_test();
 
 	// test_sorting_by_polar_angle();
 	// test_convex_hull();
