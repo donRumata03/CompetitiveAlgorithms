@@ -7,11 +7,13 @@
 #include <tests/geometry/polar_angle_sorting_test.h>
 #include <tests/geometry/convex_hull_test.h>
 #include <tests/geometry/area_and_perimeter_test.h>
+#include <tests/geometry/base_util_tests.h>
 
 int main ()
 {
 	system("chcp 65001");
 	system("cls");
+	// std::cout << "dfsdf" << std::endl;
 
 	/// Segment Tree:
 
@@ -38,10 +40,12 @@ int main ()
 	// test_eratosphene_factorization();
 
 	/// Geometry:
+	are_parallel_test();
+
 	// test_sorting_by_polar_angle();
 	// test_convex_hull();
 	// test_area_counting();
-	test_perimeter_counting();
+	// test_perimeter_counting();
 
 	return 0;
 }
