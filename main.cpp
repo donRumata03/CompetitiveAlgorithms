@@ -41,7 +41,8 @@ int main ()
 
 	/// Geometry:
 	// are_parallel_test();
-	are_co_directed_test();
+	// are_co_directed_test();
+	point_on_line_test();
 
 	// test_sorting_by_polar_angle();
 	// test_convex_hull();
