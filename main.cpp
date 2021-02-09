@@ -33,7 +33,7 @@ int main ()
 	// test_eratosphene_factorization();
 
 	/// Geometry:
-	test_sorting_by_polar_angle();
+	// test_sorting_by_polar_angle();
 
 	return 0;
 }

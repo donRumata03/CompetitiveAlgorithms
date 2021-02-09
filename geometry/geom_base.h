@@ -37,6 +37,13 @@ struct base_point {
 	{
 		return !(rhs == *this);
 	}
+
+	T sqr_abs() { return square(x) + square(y); }
+	double abs() { return std::sqrt(double(sqr_abs())); }
+
+	static T sqr_dist(base_point<T> first, base_point<T> second) {
+		return square(first.x - second.x) + square(first.y - second.y);
+	}
 };
 
 using point_d = base_point<double>;
@@ -191,6 +198,26 @@ inline bool ray_intersects_segment(point_i rp1, point_i rp2, point_i sp1, point_
 									and
 		point_on_ray(*intersection_point, to_point_d(rp1), to_point_d(rp2));
 }
+
+/// _________________________________________________________________________________________________________
+
+bool are_parallel(point_i point1, point_i point2) {
+	return cross_product(point1, point2) == 0;
+}
+
+bool are_co_directed(point_i point1, point_i point2) {
+	return are_parallel(point1, point2) and dot_product(point1, point2) > 0;
+}
+
+bool are_parallel(point_d point1, point_d point2) {
+	return almost_equal(cross_product(point1, point2), 0.);
+}
+
+bool are_co_directed(point_d point1, point_d point2) {
+	return are_parallel(point1, point2) and dot_product(point1, point2) > -geometry_epsilon;
+}
+
+
 
 
 
