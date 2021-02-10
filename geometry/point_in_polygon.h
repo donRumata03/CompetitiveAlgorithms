@@ -42,3 +42,30 @@ inline bool point_in_polygon(point_i point, const std::vector<point_i>& polygon)
 
 	return bool(intersections % 2);
 }
+
+
+template<class T>
+inline bool point_in_convex_polygon(base_point<T> point, const std::vector<base_point<T>>& polygon) {
+	// point_i generated_point = get_safe_ray_point(point, polygon);
+
+	li direction = 0;
+
+	for (size_t i = 0; i < polygon.size(); ++i) {
+		auto this_point = polygon[i];
+		auto next_point = polygon[(i + 1) % polygon.size()];
+
+		li orientation = orient(this_point, next_point, point);
+
+
+		if (direction == 0) {
+			direction = orientation;
+		}
+		else {
+			if (direction != orientation) return false;
+		}
+	}
+
+	return true;
+}
+
+

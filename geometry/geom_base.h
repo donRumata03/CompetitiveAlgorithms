@@ -80,6 +80,11 @@ T cross_product(base_point<T> first, base_point<T> second) {
 	return first.x * second.y - first.y * second.x;
 }
 
+template <class T>
+inline li orient(base_point<T> left, base_point<T> middle, base_point<T> right) {
+	return sgn(cross_product(left - middle, right - middle));
+}
+
 /// ________________________________________________________________________________
 
 inline base_point<double> line_intersection(double k1, double b1, double k2, double b2) {

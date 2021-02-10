@@ -45,10 +45,17 @@ std::ostream& operator << (std::ostream& os, const std::vector<T>& vector) {
 
 
 /// 														Numeric:
+
 template<class T>
 T square(T number) {
 	return number * number;
 }
+
+template <class T>
+li sgn(T number) {
+	return number == T(0) ? (0) : ( number < T(0) ? -1 : 1 );
+}
+
 
 
 /// 												Floating Point Utilities:
@@ -61,3 +68,9 @@ bool almost_equal(Float float1, Float float2, Float relative_eps = 1e-10, Float 
 	if(float2 == 0) return std::abs(float1) < absolute_eps;
 	return std::abs((float1 - float2) / (float1 + float2)) < relative_eps;
 }
+
+
+inline li sgn(double number) {
+	return almost_equal(number, 0.) ? (0) : ( number < 0. ? -1 : 1 );
+}
+
