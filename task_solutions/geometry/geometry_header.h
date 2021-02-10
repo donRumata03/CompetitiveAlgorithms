@@ -65,6 +65,15 @@ bool almost_equal(Float float1, Float float2, Float relative_eps = 1e-10, Float 
 	return std::abs((float1 - float2) / (float1 + float2)) < relative_eps;
 }
 
+template <class T>
+li sgn(T number) {
+	return number == T(0) ? (0) : ( number < T(0) ? -1 : 1 );
+}
+
+
+inline li sgn(double number) {
+	return almost_equal(number, 0.) ? (0) : ( number < 0. ? -1 : 1 );
+}
 
 
 
@@ -158,6 +167,12 @@ template<class T>
 T cross_product(base_point<T> first, base_point<T> second) {
 	return first.x * second.y - first.y * second.x;
 }
+
+template <class T>
+inline li orient(base_point<T> left, base_point<T> middle, base_point<T> right) {
+	return sgn(cross_product(left - middle, right - middle));
+}
+
 
 /// ________________________________________________________________________________
 
@@ -620,6 +635,34 @@ inline bool point_in_polygon(point_i point, const std::vector<point_i>& polygon)
 
 	return bool(intersections % 2);
 }
+
+
+template<class T>
+inline bool point_in_convex_polygon(base_point<T> point, const std::vector<base_point<T>>& polygon) {
+	// point_i generated_point = get_safe_ray_point(point, polygon);
+
+	li direction = 0;
+
+	for (size_t i = 0; i < polygon.size(); ++i) {
+		auto this_point = polygon[i];
+		auto next_point = polygon[(i + 1) % polygon.size()];
+
+		li orientation = orient(this_point, next_point, point);
+
+
+		if (direction == 0) {
+			direction = orientation;
+		}
+		else {
+			if (direction != orientation) return false;
+		}
+	}
+
+	return true;
+}
+
+
+
 
 /// ______________________________				polygon_area:			______________________________
 /// ______________________________				polygon_area:			______________________________
