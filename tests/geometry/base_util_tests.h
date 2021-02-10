@@ -99,3 +99,8 @@ inline void test_strange_line_intersections() {
 			point_i{3, 3}, {-3, 0}, {4, -1}, {4, 198}
 			) << std::endl;
 }
+
+
+inline void test_ray_segment_intersection() {
+
+}

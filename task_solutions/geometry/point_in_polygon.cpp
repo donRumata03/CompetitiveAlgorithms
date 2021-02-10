@@ -4,6 +4,7 @@
 
 
 // #include "geometry_header.h"
+
 /// ______________________________				Olymp functions:			______________________________
 
 
@@ -173,7 +174,7 @@ inline base_point<double> line_intersection(double k1, double b1, double k2, dou
 
 template<class T>
 std::pair<double, double> line_by_points(base_point<T> first, base_point<T> second) {
-	double k = (second.y - first.y) / (second.x - first.x);
+	double k = double(second.y - first.y) / double(second.x - first.x);
 	double b = first.y - first.x * k;
 
 	return { k, b };
@@ -188,7 +189,7 @@ inline point_d* line_intersection(point_i l11, point_i l12, point_i l21, point_i
 	if (l11.x == l12.x || l21.x == l22.x) {
 		if (l21.x == l22.x) {
 			std::swap(l11, l21);
-			std::swap(l11, l22);
+			std::swap(l12, l22);
 		}
 
 		return base_point<double>::make_heap_point(
@@ -625,10 +626,6 @@ inline bool point_in_polygon(point_i point, const std::vector<point_i>& polygon)
 /// ______________________________				polygon_area:			______________________________
 
 
-
-
-
-///// ______________________					Main function			______________________:
 
 
 int main() {

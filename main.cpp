@@ -8,6 +8,7 @@
 #include <tests/geometry/convex_hull_test.h>
 #include <tests/geometry/area_and_perimeter_test.h>
 #include <tests/geometry/base_util_tests.h>
+#include <tests/geometry/point_in_polygon_testing.h>
 
 int main ()
 {
@@ -46,7 +47,8 @@ int main ()
 	// point_on_segment_test();
 	// test_on_ray();
 	// test_simple_line_intersection();
-	test_strange_line_intersections();
+	// test_strange_line_intersections();
+	test_point_in_polygon();
 
 	// test_sorting_by_polar_angle();
 	// test_convex_hull();

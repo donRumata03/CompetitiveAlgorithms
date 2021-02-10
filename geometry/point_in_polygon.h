@@ -15,7 +15,7 @@ inline point_i get_safe_ray_point(point_i point, const std::vector<point_i>& pol
 	auto first_point = polar_angle_sorted[0];
 	auto second_point = polar_angle_sorted[1];
 
-	for (auto candidate_second_point : polygon) {
+	for (auto candidate_second_point : polar_angle_sorted) {
 		if (candidate_second_point.y != first_point.y) {
 			second_point = candidate_second_point;
 			break;

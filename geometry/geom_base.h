@@ -91,7 +91,7 @@ inline base_point<double> line_intersection(double k1, double b1, double k2, dou
 
 template<class T>
 std::pair<double, double> line_by_points(base_point<T> first, base_point<T> second) {
-	double k = (second.y - first.y) / (second.x - first.x);
+	double k = double(second.y - first.y) / double(second.x - first.x);
 	double b = first.y - first.x * k;
 
 	return { k, b };
