@@ -36,7 +36,7 @@ add_executable(CompetitiveAlgorithms
 
         geometry/polygon_area.h
         tests/geometry/area_and_perimeter_test.h
-        geometry/polygon_perimeter.h tests/geometry/point_in_polygon_testing.h tests/geometry/base_util_tests.h)
+        geometry/polygon_perimeter.h tests/geometry/point_in_polygon_testing.h tests/geometry/base_util_tests.h data_structures/BinaryHeap.cpp data_structures/BinaryHeap.h)
 
 
 set(CMAKE_CXX_STANDARD 14)

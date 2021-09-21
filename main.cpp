@@ -48,12 +48,16 @@ int main ()
 	// test_on_ray();
 	// test_simple_line_intersection();
 	// test_strange_line_intersections();
-	test_point_in_polygon();
+	// test_point_in_polygon();
 
 	// test_sorting_by_polar_angle();
 	// test_convex_hull();
 	// test_area_counting();
 	// test_perimeter_counting();
+
+	/// Binary Heap:
+
+
 
 	return 0;
 }
